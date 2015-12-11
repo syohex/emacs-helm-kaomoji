@@ -1,10 +1,11 @@
-;;; helm-kaomoji.el --- helm for kaomoji
+;;; helm-kaomoji.el --- helm for kaomoji -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2014 by Syohei YOSHIDA
 
 ;; Author: Syohei YOSHIDA <syohex@gmail.com>
-;; URL:
+;; URL: https://github.com/syohex/emacs-helm-kaomoji
 ;; Version: 0.01
+;; Package-Requires: ((helm-core "1.7.7"))
 
 ;; This program is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -46,11 +47,11 @@
       (reverse kaomojis))))
 
 (defvar helm-kaomoji--source
-  '((name . "Helm Kaomoji")
-    (candidates . helm-kaomoji--candidates)
-    (candidates-number-limit . 9999)
-    (action . (("Insert" . insert)
-               ("Show kaomoji" . message)))))
+  (helm-build-sync-source "Helm Kaomoji"
+    :candidates #'helm-kaomoji--candidates
+    :candidate-number-limit 9999
+    :action '(("Insert" . insert)
+              ("Show kaomoji" . message))))
 
 ;;;###autoload
 (defun helm-kaomoji ()
